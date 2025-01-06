@@ -3,6 +3,6 @@
 {% block content %}
 <h1>Dashboard of : {{ request.user.username }} </h1>
 
-<a href="{% url 'login' %}" class="btn btn-default">Logout</a>
+<a href="{% url 'logout' %}" class="btn btn-default">Logout</a>
 
 {% endblock %}

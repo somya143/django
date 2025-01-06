@@ -1,9 +1,11 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
+from .middlewares import auth,guest
 
 # Create your views here.
 
+@guest
 def register_user(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -18,6 +20,7 @@ def register_user(request):
         form = UserCreationForm(initial=initial_data)
         return render(request,'auth/register.html',{'form':form})
 
+@guest
 def login_user(request):
     if request.method == 'POST':
         form = AuthenticationForm(request,data=request.POST)
@@ -32,6 +35,7 @@ def login_user(request):
         form = AuthenticationForm(initial=initial_data)
     return render(request,'auth/login.html',{'form':form})
 
+@auth
 def dashboard(request):
     return render(request,'dashboard.html')
 
